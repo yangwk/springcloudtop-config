@@ -1,0 +1,7 @@
+
+eureka:
+   instance:
+      hostname: eureka.node3
+   client:
+      serviceUrl:
+         defaultZone: http://eureka.node1:${server.port}/eureka/,http://eureka.node2:${server.port}/eureka/

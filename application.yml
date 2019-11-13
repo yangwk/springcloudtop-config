@@ -1,0 +1,38 @@
+eureka:
+   instance:
+      hostname: ${spring.cloud.client.ip-address}
+      prefer-ip-address: true
+      instance-id: ${spring.cloud.client.ip-address}:${server.port}
+      lease-expiration-duration-in-seconds: 10
+      lease-renewal-interval-in-seconds: 5
+      
+   client:
+      # value same as instance.lease-renewal-interval-in-seconds
+      registry-fetch-interval-seconds: 5
+      serviceUrl:
+         defaultZone: http://192.168.56.101:8761/eureka/,http://192.168.56.102:8761/eureka/,http://192.168.56.103:8761/eureka/
+
+
+# When using Hystrix commands that wrap Ribbon clients you want to make sure your Hystrix timeout is configured to be longer than the configured Ribbon timeout, including any potential retries that might be made.
+# For example, if your Ribbon connection timeout is one second and the Ribbon client might retry the request three times, than your Hystrix timeout should be slightly more than three seconds.
+hystrix.command.default.execution.timeout.enabled: true
+# longer than (1 + ribbon.MaxAutoRetries + 1 + ribbon.MaxAutoRetriesNextServer) * ( ribbon.ConnectTimeout + ribbon.ReadTimeout )
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 31000
+hystrix.command.fallbackcmd.execution.timeout.enabled: true
+hystrix.command.fallbackcmd.execution.isolation.thread.timeoutInMilliseconds: 1500
+
+
+ribbon:
+   ConnectTimeout: 1500
+   ReadTimeout: 6000
+   # Whether all operations can be retried for this client
+   OkToRetryOnAllOperations: true
+   # Max number of retries on the same server (excluding the first try)
+   MaxAutoRetries: 1
+   # Max number of next servers to retry (excluding the first server)
+   MaxAutoRetriesNextServer: 1
+   # Interval to refresh the server list from the source
+   ServerListRefreshInterval: 2000
+   retryableStatusCodes: 404,502,408
+   MaxTotalHttpConnections: 500
+   MaxConnectionsPerHost: 1000

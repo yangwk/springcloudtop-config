@@ -1,0 +1,7 @@
+server:
+   port: 8765
+
+zuul:
+   routes:
+      springcloudtop-feigh-client: /springcloudtop-feigh-client/**
+      springcloudtop-zuul: /self/**

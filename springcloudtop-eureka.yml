@@ -1,0 +1,10 @@
+server:
+   port: 8761
+
+eureka:
+   instance:
+      prefer-ip-address: false
+   server:
+      wait-time-in-ms-when-sync-empty: 0
+      # expired lease evict interval
+      eviction-interval-timer-in-ms: 5000
