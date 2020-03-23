@@ -1,15 +1,15 @@
 server:
    port: 8081
 mybatis:
-    mapperLocations: classpath:mapper/*.xml
-    typeAliasesPackage: io.seata.sample.entity
+   mapperLocations: classpath:mapper/*.xml
+   typeAliasesPackage: io.seata.sample.entity
 spring:
-    cloud:
-        alibaba:
-            seata:
-                tx-service-group: fsp_tx_group
-    datasource:
-        driver-class-name: com.mysql.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/seat-account
-        username: root
-        password: root
+   cloud:
+      alibaba:
+         seata:
+            tx-service-group: fsp_tx_group
+   datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/seat-account
+      username: root
+      password: root
